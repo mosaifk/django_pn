@@ -1,5 +1,7 @@
 from django.db import models
 from django.conf.global_settings import AUTH_USER_MODEL
+
+
 # Create your models here.
 
 
@@ -9,18 +11,21 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
 class ProjestStatue(models.IntegerChoices):
     PENDING = 1, "pending"
     COMPLETED = 2, "completed"
     POSTPONED = 3, "postponed"
     CANCELED = 4, "canceled"
 
+
 class Project(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     statue = models.IntegerField(
         choices=ProjestStatue.choices,
-        default=ProjestStatue.PENDING
+        default=ProjestStatue.PENDING,
+        null=True
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -28,7 +33,7 @@ class Project(models.Model):
     user = models.ForeignKey(
         AUTH_USER_MODEL,
         on_delete=models.CASCADE
-    ) # ما لازم نسوي class user لانه موجود في جانجو
+    )  # ما لازم نسوي class user لانه موجود في جانجو
 
     def __str__(self):
         return self.title
