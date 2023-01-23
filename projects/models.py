@@ -12,8 +12,8 @@ class Category(models.Model):
 class ProjestStatue(models.IntegerChoices):
     PENDING = 1, "pending"
     COMPLETED = 2, "completed"
-    POSTPONED = 3 , "postponed"
-    CANCELED = 4 , "canceled"
+    POSTPONED = 3, "postponed"
+    CANCELED = 4, "canceled"
 
 class Project(models.Model):
     title = models.CharField(max_length=255)
@@ -28,7 +28,7 @@ class Project(models.Model):
     user = models.ForeignKey(
         AUTH_USER_MODEL,
         on_delete=models.CASCADE
-    )
+    ) # ما لازم نسوي class user لانه موجود في جانجو
 
     def __str__(self):
         return self.title
